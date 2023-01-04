@@ -7,7 +7,8 @@ spec:
   selector:
     matchLabels:
       app: skiapp
-  replicas: 3 # <- change replicas to 3
+  replicas: 2
+  #replicas: 3 # <- change replicas to 3 for testing Karpenter
   template:
     metadata:
       labels:
@@ -25,17 +26,17 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-      nodeSelector: # <- add nodeSelector, toleration and spread constraints
-        team: default
-        type: karpenter
-      tolerations:
-        - key: "karpenter"
-          operator: "Exists"
-          effect: "NoSchedule"
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: topology.kubernetes.io/zone
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: skiapp
+      #nodeSelector: # <- add nodeSelector, toleration and spread constraints
+      #  team: default
+      #  type: karpenter
+      #tolerations:
+      #  - key: "karpenter"
+      #    operator: "Exists"
+      #    effect: "NoSchedule"
+      #topologySpreadConstraints:
+      #  - maxSkew: 1
+      #    topologyKey: topology.kubernetes.io/zone
+      #    whenUnsatisfiable: DoNotSchedule
+      #    labelSelector:
+      #      matchLabels:
+      #        app: skiapp
